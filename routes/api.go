@@ -7,9 +7,9 @@ import (
 )
 
 func RegisterAPIRoutes(router *gin.Engine) {
-	router.Group("/TMDB")
+	tmdb := router.Group("/TMDB")
 	{
-		router.GET("", func(c *gin.Context) {
+		tmdb.GET("", func(c *gin.Context) {
 			c.JSON(http.StatusOK, gin.H{
 				"hello": "world",
 			})

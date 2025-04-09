@@ -14,7 +14,7 @@ func SetupRpute(router *gin.Engine) {
 	//注册路由信息
 	routes.RegisterAPIRoutes(router)
 	//处理未命名路由
-
+	Handle404Route(router)
 }
 
 func RegisterGlobalsMiddlewares(router *gin.Engine) {
