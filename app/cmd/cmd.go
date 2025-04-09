@@ -7,6 +7,9 @@ import (
 	"github.com/spf13/cobra"
 )
 
+var Type string
+
+// 注册默认运行
 func RegisterDefault(rootCmd *cobra.Command, defaultCmd *cobra.Command) {
 	//自rootCmd开始找子命令（包括rootCmd）
 	cmd, _, err := rootCmd.Find(os.Args[1:])
@@ -17,4 +20,9 @@ func RegisterDefault(rootCmd *cobra.Command, defaultCmd *cobra.Command) {
 		args := append([]string{defaultCmd.Use}, os.Args[1:]...)
 		rootCmd.SetArgs(args)
 	}
+}
+
+// 注册Type参数
+func RegisterGlobalElement(rootCmd *cobra.Command) {
+	rootCmd.Flags().StringVarP(&Type, "type", "t", "null", "it represents the movie genre you want to search for")
 }

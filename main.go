@@ -18,7 +18,7 @@ func init() {
 func main() {
 	var rootCmd = &cobra.Command{
 		Use:   "tedb-app",
-		Short: "just receive a parameter: type, you can get the type movies",
+		Short: console.Green("just receive a parameter: type, you can get the type movies"),
 
 		//所有子命令都会执行此代码
 		PersistentPreRun: func(cmd *cobra.Command, args []string) {
@@ -30,6 +30,8 @@ func main() {
 	rootCmd.AddCommand(
 		cmd.Serve,
 	)
+
+	cmd.RegisterGlobalElement(rootCmd)
 
 	cmd.RegisterDefault(rootCmd, cmd.Serve)
 
