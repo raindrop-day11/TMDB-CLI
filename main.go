@@ -1,20 +1,16 @@
 package main
 
 import (
-	"net/http"
+	"tmdb-cli-tool/bootstrap"
 
 	"github.com/gin-gonic/gin"
 )
 
 func main() {
 	router := gin.New()
-	router.Use(gin.Logger(), gin.Recovery())
 
-	router.GET("/", func(c *gin.Context) {
-		c.JSON(http.StatusOK, gin.H{
-			"hello": "world",
-		})
-	})
+	//初始化路由
+	bootstrap.SetupRpute(router)
 
 	router.Run(":8000")
 }
