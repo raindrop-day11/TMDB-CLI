@@ -27,3 +27,10 @@ func IsEmpty(val interface{}) bool {
 
 	return reflect.DeepEqual(val, reflect.Zero(v.Type()).Interface())
 }
+
+func FirstElement(parameters []string) string {
+	if len(parameters) > 0 {
+		return parameters[0]
+	}
+	return ""
+}

@@ -1,7 +1,6 @@
 package config
 
 import (
-	"fmt"
 	"tmdb-cli-tool/pkg/helpers"
 
 	"github.com/spf13/cast"
@@ -26,8 +25,9 @@ func init() {
 	viper.AddConfigPath(".")
 	//配置文件内配置名称的前缀是什么
 	viper.SetEnvPrefix("appenv")
-	//配置文件需要自动更新，即监控
-	viper.WatchConfig()
+
+	//读取环境变量
+	viper.AutomaticEnv()
 
 	ConfigFuncs = make(map[string]ConfigFunc)
 }
@@ -45,8 +45,10 @@ func loadEnv() {
 
 	viper.SetConfigName(envdir)
 	if err := viper.ReadInConfig(); err != nil {
-		fmt.Println(err.Error())
+		panic(err)
 	}
+	//配置文件需要自动更新，即监控
+	viper.WatchConfig()
 }
 
 func loadConfig() {
