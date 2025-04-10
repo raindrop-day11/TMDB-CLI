@@ -21,6 +21,11 @@ tmdb-app --type "upcoming"
 ### Usage
 ```bash
 ./tmdb-app.exe --type "type"
+```
 
+```bash
+./tmdb-app.exe
 
+# 只运行这个，表示运行API
+# http://localhost:port/TMDB/:movie?language=l&page=1
 ```
