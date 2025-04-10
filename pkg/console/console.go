@@ -1,6 +1,8 @@
 package console
 
 import (
+	"os"
+
 	"github.com/fatih/color"
 )
 
@@ -20,4 +22,11 @@ func YellowPrint(msg string) {
 
 func RedPrint(msg string) {
 	Red("%s", msg)
+}
+
+func ExitIf(err error) {
+	if err != nil {
+		RedPrint(err.Error())
+		os.Exit(1)
+	}
 }
