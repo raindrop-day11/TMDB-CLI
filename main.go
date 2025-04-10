@@ -20,6 +20,8 @@ func main() {
 		Use:   "tedb-app",
 		Short: console.Green("just receive a parameter: type, you can get the type movies"),
 
+		Run: cmd.RunByCmd,
+
 		//所有子命令都会执行此代码
 		PersistentPreRun: func(cmd *cobra.Command, args []string) {
 			//初始化配置项
@@ -31,9 +33,8 @@ func main() {
 		cmd.Serve,
 	)
 
-	cmd.RegisterGlobalElement(rootCmd)
-
 	cmd.RegisterDefault(rootCmd, cmd.Serve)
+	cmd.RegisterGlobalElement(rootCmd)
 
 	if err := rootCmd.Execute(); err != nil {
 		fmt.Println(console.Red("Failed to run the app with %s", err.Error()))
