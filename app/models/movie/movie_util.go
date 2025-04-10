@@ -1,7 +1,6 @@
 package movie
 
 import (
-	"encoding/json"
 	"io"
 	"net/http"
 	"time"
@@ -9,18 +8,18 @@ import (
 	"tmdb-cli-tool/pkg/console"
 )
 
-func GetMovies(url string) (movies Movies) {
+func GetMovies(url string) (data []byte) {
 	//创建一个请求体
 	rep, err := http.NewRequest("GET", url, nil)
 	console.ExitIf(err)
 
 	//设置请求头
-	rep.Header.Set("accept", "application/json")
-	rep.Header.Set("Authorization", "Bearer "+config.GetString("tmdb.token"))
+	rep.Header.Add("accept", "application/json")
+	rep.Header.Add("Authorization", "Bearer "+config.GetString("tmdb.token"))
 
 	//自定义http请求客户端
 	client := &http.Client{
-		Timeout: 10 * time.Second,
+		Timeout: 100 * time.Second,
 	}
 
 	//运行
@@ -30,11 +29,7 @@ func GetMovies(url string) (movies Movies) {
 	defer rps.Body.Close()
 
 	//读取数据
-	data, err := io.ReadAll(rps.Body)
-	console.ExitIf(err)
-
-	//解析到movies
-	err = json.Unmarshal(data, &movies)
+	data, err = io.ReadAll(rps.Body)
 	console.ExitIf(err)
 
 	return

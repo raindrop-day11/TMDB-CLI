@@ -1,7 +1,7 @@
 package routes
 
 import (
-	"net/http"
+	"tmdb-cli-tool/app/controllers"
 
 	"github.com/gin-gonic/gin"
 )
@@ -9,10 +9,7 @@ import (
 func RegisterAPIRoutes(router *gin.Engine) {
 	tmdb := router.Group("/TMDB")
 	{
-		tmdb.GET("", func(c *gin.Context) {
-			c.JSON(http.StatusOK, gin.H{
-				"hello": "world",
-			})
-		})
+		movie := new(controllers.MovieControllers)
+		tmdb.GET("/movie", movie.GetMovies)
 	}
 }

@@ -1,7 +1,14 @@
 package movie
 
-type Movies struct {
+type MoviesWithDate struct {
 	Dates         Date    `json:"dates"`
+	Page          int64   `json:"page"`
+	Results       []Movie `json:"results"`
+	Total_pages   int64   `json:"total_pages"`
+	Total_Results int64   `json:"total_results"`
+}
+
+type MoviesWithoutDate struct {
 	Page          int64   `json:"page"`
 	Results       []Movie `json:"results"`
 	Total_pages   int64   `json:"total_pages"`
